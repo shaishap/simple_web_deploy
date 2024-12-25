@@ -1,0 +1,28 @@
+{{- $name := include "swebdeploy.name" . -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $name }}-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ $name }}-app
+  template:
+    metadata:
+      labels:
+        app: {{ $name }}-app
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}-container
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        resources:
+          requests:
+            memory: "{{ .Values.resources.requests.memory }}"
+            cpu: "{{ .Values.resources.requests.cpu }}"
+          limits:
+            memory: "{{ .Values.resources.limits.memory }}"
+            cpu: "{{ .Values.resources.limits.cpu }}"
+        ports:
+        - containerPort: {{ .Values.image.containerPort }}

@@ -1,0 +1,18 @@
+{{- $name := include "swebdeploy.name" . -}}
+{{- $labels := include "swebdeploy.labels" . -}}
+{{- $selectorLabels := include "swebdeploy.selectorLabels" . -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $name }}-service
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- $labels | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+{{- with .Values.service.ports }}
+  {{- toYaml . | nindent 2 }}
+{{- end }}
+  selector:
+    {{- $selectorLabels | nindent 4 }}
