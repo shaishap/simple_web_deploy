@@ -1,12 +1,11 @@
-{{- $name := include "swebdeploy.name" . -}}
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
-  name: {{ $name }}
+  name: {{ include "swebdeploy.fullname" . }}
   namespace: {{ .Values.namespace }}
 spec:
   scaleTargetRef:
-    name: {{ $name }}
+    name: {{ include "swebdeploy.fullname" . }}
   minReplicaCount: {{ .Values.autoscaling.minReplicas }}
   maxReplicaCount: {{ .Values.autoscaling.maxReplicas }}
   triggers:
