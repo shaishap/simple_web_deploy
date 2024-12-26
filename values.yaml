@@ -4,21 +4,15 @@ image:
   repository: "acrinterview.azurecr.io/simple-web"
   pullPolicy: IfNotPresent
   tag: "latest"
-  containerPort: 80
 
 imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
+nameOverride: "swebdeploy"
+fullnameOverride: "simple-web-deploy"
 namespace: "shai"
 
 service:
   type: ClusterIP
   port: 80
-  ports:
-    - name: http
-      port: 80
-      targetPort: 80
-      protocol: TCP
 
 ingress:
   enabled: true
@@ -39,6 +33,7 @@ resources:
     memory: 128Mi
 
 autoscaling:
+  enabled: true
   minReplicas: 1
   maxReplicas: 10
   targetCPUUtilizationPercentage: 80
