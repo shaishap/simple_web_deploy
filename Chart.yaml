@@ -1,8 +1,8 @@
 apiVersion: v2
 
 name: swebdeploy
-description: simple-web deploy chart
+description: simple-web deployment chart
 
 type: application
-version: 0.1.4
+version: 0.1.5
 appVersion: "0.1.0"

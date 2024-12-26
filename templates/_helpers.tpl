@@ -36,6 +36,8 @@ Common labels
 {{- define "swebdeploy.labels" -}}
 helm.sh/chart: {{ include "swebdeploy.chart" . }}
 {{ include "swebdeploy.selectorLabels" . }}
+app.kubernetes.io/name: {{ include "swebdeploy.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -46,6 +48,6 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Selector labels
 */}}
 {{- define "swebdeploy.selectorLabels" -}}
-app: {{ include "swebdeploy.name" . }}-app
+app: {{ include "swebdeploy.name" . }}
 {{- end }}
 

@@ -2,11 +2,11 @@
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
-  name: {{ $name }}-scaledobject
+  name: {{ $name }}
   namespace: {{ .Values.namespace }}
 spec:
   scaleTargetRef:
-    name: {{ $name }}-deployment
+    name: {{ $name }}
   minReplicaCount: {{ .Values.autoscaling.minReplicas }}
   maxReplicaCount: {{ .Values.autoscaling.maxReplicas }}
   triggers:
